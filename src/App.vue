@@ -1,43 +1,26 @@
 <template>
   <div id="app">
-    <!-- Menú de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Estacionamiento</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/principal" class="nav-link" active-class="active">Estacionamientos</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/tarifas" class="nav-link" active-class="active">Tarifas</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/control" class="nav-link" active-class="active">Control</router-link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- Vista principal -->
+    <AppNavbar v-if="showNavbar" /> 
     <router-view />
   </div>
 </template>
 
 <script>
+import AppNavbar from './components/AppNavbar.vue'; 
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    AppNavbar, 
+  },
+  computed: {
+    showNavbar() {
+      return this.$route.path !== '/login' && this.$route.path !== '/register';
+    },
+  },
 };
 </script>
 
 <style>
-.nav-link {
-  color: #000 !important;
-}
-.nav-link.active {
-  color: #007bff !important;
-}
+/* Puedes agregar estilos generales aquí */
 </style>
